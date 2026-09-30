@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
+import { useState } from "react";
+import { HeroDiagram, D, DEFAULT_CAPTION } from "@/components/HeroDiagram";
 
 const TITLE = "Evrim Bilgen · Technical Product Manager";
 const DESCRIPTION =
@@ -201,6 +203,7 @@ const pillSecondary =
   "inline-flex items-center justify-center rounded-full border border-line bg-surface px-6 py-3 text-sm font-semibold text-navy transition-colors hover:bg-sand";
 
 function Portfolio() {
+  const [active, setActive] = useState<string | null>(null);
   useReveal();
 
   return (
@@ -225,7 +228,7 @@ function Portfolio() {
       </header>
 
       {/* HERO */}
-      <section id="top" className={`${shell} reveal grid gap-12 py-16 sm:py-24 lg:grid-cols-2 lg:items-center`}>
+      <section id="top" className={`${shell} reveal grid gap-12 pt-24 pb-16 sm:pb-24 lg:grid-cols-2 lg:items-center`}>
         <div>
           <p className="eyebrow">Istanbul · Technical Product Manager</p>
           <h1
@@ -235,7 +238,7 @@ function Portfolio() {
             <span className="block">Evrim</span>
             <span className="block text-navy-grey">Bilgen.</span>
           </h1>
-          <p className="mt-8 max-w-[34ch] text-hero-ink" style={{ fontSize: "clamp(20px, 2.4vw, 27px)", lineHeight: 1.3 }}>
+          <p className="mt-8 max-w-[34ch] text-hero-ink" style={{ fontSize: "clamp(20px, 2.4vw, 27px)", lineHeight: 1.3, textWrap: "balance" }}>
             Bridging deep software architecture and product strategy to ship production-grade AI products: search, RAG
             and LLM systems.
           </p>
@@ -259,9 +262,11 @@ function Portfolio() {
             id="herocard"
             className="hero-grid w-full overflow-hidden border border-line bg-surface"
             style={{ borderRadius: 28, aspectRatio: "640 / 470" }}
-          />
+          >
+            <HeroDiagram active={active} onActive={setActive} />
+          </div>
           <p id="cap" className="mt-4 text-right text-sm text-ink">
-            Modular RAG, and the product call I make at each stage. Hover a module.
+            {active ? D[active] : DEFAULT_CAPTION}
           </p>
         </div>
       </section>

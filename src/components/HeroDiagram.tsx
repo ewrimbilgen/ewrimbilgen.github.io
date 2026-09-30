@@ -19,21 +19,24 @@ export const D: Record<string, string> = {
 
 type Props = { active: string | null; onActive: (k: string | null) => void };
 
-export function HeroDiagram({ active, onActive }: Props) {
-  const M = ({ k, children }: { k: string; children: ReactNode }) => (
+function M({ k, a, on, children }: { k: string; a: string | null; on: (k: string | null) => void; children: ReactNode }) {
+  return (
     <g
-      className={`m${active === k ? " on" : ""}`}
+      className={`m${a === k ? " on" : ""}`}
       data-k={k}
       tabIndex={0}
-      onMouseEnter={() => onActive(k)}
-      onClick={() => onActive(k)}
-      onFocus={() => onActive(k)}
-      onMouseLeave={() => onActive(null)}
-      onBlur={() => onActive(null)}
+      onMouseEnter={() => on(k)}
+      onClick={() => on(k)}
+      onFocus={() => on(k)}
+      onMouseLeave={() => on(null)}
+      onBlur={() => on(null)}
     >
       {children}
     </g>
   );
+}
+
+export function HeroDiagram({ active, onActive }: Props) {
   const ah = "url(#ah)";
   return (
     <svg
@@ -79,22 +82,22 @@ export function HeroDiagram({ active, onActive }: Props) {
         <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#flowI" /></animateMotion>
       </circle>
 
-      <M k="src"><rect x="20" y="48" width="112" height="50" rx="12" fill="#E9DFCB" /><text className="lbl" x="76" y="70" textAnchor="middle">SOURCES</text><text className="sub" x="76" y="86" textAnchor="middle">PDFs · reports · docs</text></M>
-      <M k="chunk"><rect x="162" y="48" width="122" height="50" rx="12" fill="#FCFAF4" /><text className="lbl" x="223" y="70" textAnchor="middle">PARSE &amp; CHUNK</text><text className="sub" x="223" y="86" textAnchor="middle">layout · metadata</text></M>
-      <M k="embed"><rect x="314" y="48" width="122" height="50" rx="12" fill="#FCFAF4" /><text className="lbl" x="375" y="70" textAnchor="middle">EMBED</text><text className="sub" x="375" y="86" textAnchor="middle">dense vectors</text></M>
-      <M k="index"><rect x="466" y="48" width="154" height="50" rx="12" fill="#D3E2F0" /><text className="lbl" x="543" y="70" textAnchor="middle">INDEX</text><text className="sub" x="543" y="86" textAnchor="middle">keyword + vector</text></M>
+      <M a={active} on={onActive} k="src"><rect x="20" y="48" width="112" height="50" rx="12" fill="#E9DFCB" /><text className="lbl" x="76" y="70" textAnchor="middle">SOURCES</text><text className="sub" x="76" y="86" textAnchor="middle">PDFs · reports · docs</text></M>
+      <M a={active} on={onActive} k="chunk"><rect x="162" y="48" width="122" height="50" rx="12" fill="#FCFAF4" /><text className="lbl" x="223" y="70" textAnchor="middle">PARSE &amp; CHUNK</text><text className="sub" x="223" y="86" textAnchor="middle">layout · metadata</text></M>
+      <M a={active} on={onActive} k="embed"><rect x="314" y="48" width="122" height="50" rx="12" fill="#FCFAF4" /><text className="lbl" x="375" y="70" textAnchor="middle">EMBED</text><text className="sub" x="375" y="86" textAnchor="middle">dense vectors</text></M>
+      <M a={active} on={onActive} k="index"><rect x="466" y="48" width="154" height="50" rx="12" fill="#D3E2F0" /><text className="lbl" x="543" y="70" textAnchor="middle">INDEX</text><text className="sub" x="543" y="86" textAnchor="middle">keyword + vector</text></M>
 
-      <M k="q"><rect x="20" y="164" width="96" height="54" rx="12" fill="#FCFAF4" /><text className="lbl" x="68" y="188" textAnchor="middle">QUESTION</text><text className="sub" x="68" y="204" textAnchor="middle">user intent</text></M>
-      <M k="plan"><rect x="146" y="164" width="130" height="54" rx="12" fill="#F3D9D0" /><text className="lbl" x="211" y="188" textAnchor="middle">AGENT · PLANNER</text><text className="sub" x="211" y="204" textAnchor="middle">plan · route · call tools</text></M>
-      <M k="retr"><rect x="306" y="164" width="130" height="54" rx="12" fill="#1C2540" style={{ stroke: "#1C2540" }} /><text className="lbl" x="371" y="188" textAnchor="middle" style={{ fill: "#F7F3EA" }}>RETRIEVAL</text><text className="sub" x="371" y="204" textAnchor="middle" style={{ fill: "#C4CADD" }}>hybrid search</text></M>
-      <M k="rerank"><rect x="466" y="164" width="154" height="54" rx="12" fill="#FCFAF4" /><text className="lbl" x="543" y="188" textAnchor="middle">RE-RANK &amp; FILTER</text><text className="sub" x="543" y="204" textAnchor="middle">best evidence · permissions</text></M>
-      <M k="gen"><rect x="466" y="262" width="154" height="54" rx="12" fill="#CFE3D4" /><text className="lbl" x="543" y="286" textAnchor="middle">SYNTHESIS</text><text className="sub" x="543" y="302" textAnchor="middle">grounded in evidence</text></M>
-      <M k="ans"><rect x="280" y="262" width="160" height="54" rx="12" fill="#D3E2F0" /><text className="lbl" x="360" y="286" textAnchor="middle">ANSWER + CITATIONS</text><text className="sub" x="360" y="302" textAnchor="middle">every claim sourced</text></M>
+      <M a={active} on={onActive} k="q"><rect x="20" y="164" width="96" height="54" rx="12" fill="#FCFAF4" /><text className="lbl" x="68" y="188" textAnchor="middle">QUESTION</text><text className="sub" x="68" y="204" textAnchor="middle">user intent</text></M>
+      <M a={active} on={onActive} k="plan"><rect x="146" y="164" width="130" height="54" rx="12" fill="#F3D9D0" /><text className="lbl" x="211" y="188" textAnchor="middle">AGENT · PLANNER</text><text className="sub" x="211" y="204" textAnchor="middle">plan · route · call tools</text></M>
+      <M a={active} on={onActive} k="retr"><rect x="306" y="164" width="130" height="54" rx="12" fill="#1C2540" style={{ stroke: "#1C2540" }} /><text className="lbl" x="371" y="188" textAnchor="middle" style={{ fill: "#F7F3EA" }}>RETRIEVAL</text><text className="sub" x="371" y="204" textAnchor="middle" style={{ fill: "#C4CADD" }}>hybrid search</text></M>
+      <M a={active} on={onActive} k="rerank"><rect x="466" y="164" width="154" height="54" rx="12" fill="#FCFAF4" /><text className="lbl" x="543" y="188" textAnchor="middle">RE-RANK &amp; FILTER</text><text className="sub" x="543" y="204" textAnchor="middle">best evidence · permissions</text></M>
+      <M a={active} on={onActive} k="gen"><rect x="466" y="262" width="154" height="54" rx="12" fill="#CFE3D4" /><text className="lbl" x="543" y="286" textAnchor="middle">SYNTHESIS</text><text className="sub" x="543" y="302" textAnchor="middle">grounded in evidence</text></M>
+      <M a={active} on={onActive} k="ans"><rect x="280" y="262" width="160" height="54" rx="12" fill="#D3E2F0" /><text className="lbl" x="360" y="286" textAnchor="middle">ANSWER + CITATIONS</text><text className="sub" x="360" y="302" textAnchor="middle">every claim sourced</text></M>
 
       <path className="ln" d="M165 222C165 245 80 238 80 260" markerStart={ah} markerEnd={ah} />
-      <M k="mcp"><rect x="20" y="262" width="120" height="54" rx="12" fill="#E9DFCB" /><text className="lbl" x="80" y="286" textAnchor="middle">TOOLS · MCP</text><text className="sub" x="80" y="302" textAnchor="middle">APIs · DBs · apps</text></M>
+      <M a={active} on={onActive} k="mcp"><rect x="20" y="262" width="120" height="54" rx="12" fill="#E9DFCB" /><text className="lbl" x="80" y="286" textAnchor="middle">TOOLS · MCP</text><text className="sub" x="80" y="302" textAnchor="middle">APIs · DBs · apps</text></M>
 
-      <M k="eval">
+      <M a={active} on={onActive} k="eval">
         <rect x="20" y="372" width="600" height="70" rx="14" fill="#F7F3EA" style={{ stroke: "#8A91AA", strokeDasharray: "5 5" }} />
         <text className="lbl" x="44" y="401">EVALUATION &amp; FEEDBACK</text><text className="sub" x="44" y="419">Langfuse · RAGAS · query logs</text>
         <rect x="252" y="394" width="92" height="26" rx="13" fill="#FCFAF4" /><text className="sub" x="298" y="411" textAnchor="middle">query success</text>
