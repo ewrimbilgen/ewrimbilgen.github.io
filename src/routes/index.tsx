@@ -166,7 +166,7 @@ const CHIPS = [
 ];
 
 const CAREER = [
-  { years: "2025–now", initials: "FT", company: "Fractional TPM", role: "AI product consultant", location: "Remote" },
+  { years: "2025–now", initials: "FT", company: "Fractional TPM", role: "AI product work with B2B SaaS and early-stage teams", location: "Remote" },
   {
     years: "2022–2025",
     initials: "EM",
