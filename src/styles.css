@@ -142,3 +142,108 @@
     color: var(--color-foreground);
   }
 }
+
+/* ---------------- Portfolio design system ---------------- */
+@theme inline {
+  --color-cream: var(--cream);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-navy-grey: var(--navy-grey);
+  --color-ink: var(--ink);
+  --color-hero-ink: var(--hero-ink);
+  --color-sage: var(--sage);
+  --color-blush: var(--blush);
+  --color-sky: var(--sky);
+  --color-sand: var(--sand);
+  --color-dark-card: var(--dark-card);
+  --color-dark-line: var(--dark-line);
+  --color-dark-eyebrow: var(--dark-eyebrow);
+  --color-dark-body: var(--dark-body);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --cream: oklch(0.9648 0.0127 86.83);
+  --surface: oklch(0.985 0.0082 91.48);
+  --line: oklch(0.8999 0.026 84.59);
+  --navy: oklch(0.2705 0.052 268.8);
+  --navy-grey: oklch(0.5596 0.0461 272.8);
+  --ink: oklch(0.503 0.0338 266.08);
+  --hero-ink: oklch(0.3399 0.054 271.89);
+  --sage: oklch(0.8968 0.0294 153.31);
+  --blush: oklch(0.9042 0.0315 40.07);
+  --sky: oklch(0.9057 0.0251 246.22);
+  --sand: oklch(0.9063 0.0288 84.59);
+  --dark-card: oklch(0.3132 0.0609 269.87);
+  --dark-line: oklch(0.3817 0.0736 270.54);
+  --dark-eyebrow: oklch(0.7629 0.0397 272.38);
+  --dark-body: oklch(0.8402 0.0272 271.81);
+
+  --background: var(--cream);
+  --foreground: var(--navy);
+  --card: var(--surface);
+  --card-foreground: var(--navy);
+  --primary: var(--navy);
+  --primary-foreground: var(--cream);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--navy);
+  --muted: var(--surface);
+  --muted-foreground: var(--ink);
+  --accent: var(--sand);
+  --accent-foreground: var(--navy);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--navy-grey);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@utility eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink);
+}
+
+@utility headline {
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+@utility context-line {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--navy-grey);
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility hero-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 1;
+}
