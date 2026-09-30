@@ -221,7 +221,7 @@ function Portfolio() {
               </a>
             ))}
           </nav>
-          <a href={CV} className={`${pillSecondary} px-5 py-2`}>
+          <a href={CV} target="_blank" rel="noopener noreferrer" className={`${pillSecondary} px-5 py-2`}>
             CV ↗
           </a>
         </div>
@@ -243,13 +243,13 @@ function Portfolio() {
             and LLM systems.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href={LINKEDIN} target="_blank" rel="noreferrer" className={pillPrimary}>
+            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className={pillPrimary}>
               LinkedIn ↗
             </a>
-            <a href={GITHUB} target="_blank" rel="noreferrer" className={pillSecondary}>
+            <a href={GITHUB} target="_blank" rel="noopener noreferrer" className={pillSecondary}>
               GitHub ↗
             </a>
-            <a href={CV} className={pillSecondary}>
+            <a href={CV} target="_blank" rel="noopener noreferrer" className={pillSecondary}>
               Download CV ↓
             </a>
           </div>
@@ -463,10 +463,10 @@ function Portfolio() {
             <a href="mailto:bilgen.evrim@gmail.com" className={pillPrimary}>
               Email
             </a>
-            <a href={LINKEDIN} target="_blank" rel="noreferrer" className={pillSecondary}>
+            <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className={pillSecondary}>
               LinkedIn ↗
             </a>
-            <a href={GITHUB} target="_blank" rel="noreferrer" className={pillSecondary}>
+            <a href={GITHUB} target="_blank" rel="noopener noreferrer" className={pillSecondary}>
               GitHub ↗
             </a>
           </div>
