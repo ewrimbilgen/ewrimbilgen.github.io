@@ -258,9 +258,10 @@ function Portfolio() {
           </p>
         </div>
         <div>
+          <p className="eyebrow" style={{ marginBottom: 14 }}>How I design a RAG system</p>
           <div
             id="herocard"
-            className="hero-grid w-full overflow-hidden border border-line bg-surface"
+            className="w-full overflow-hidden border border-line"
             style={{ borderRadius: 28, aspectRatio: "640 / 470" }}
           >
             <HeroDiagram active={active} onActive={setActive} />

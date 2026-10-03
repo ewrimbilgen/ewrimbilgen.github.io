@@ -37,7 +37,7 @@ function M({ k, a, on, children }: { k: string; a: string | null; on: (k: string
 }
 
 export function HeroDiagram({ active, onActive }: Props) {
-  const ah = "url(#ah)";
+  const ah = "url(#ah2)";
   return (
     <svg
       viewBox="0 0 640 470"
@@ -48,18 +48,31 @@ export function HeroDiagram({ active, onActive }: Props) {
       height="100%"
     >
       <defs>
-        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M0 0L10 5L0 10z" fill="#8A91AA" />
+        <marker id="ah2" viewBox="0 0 10 10" refX={8.5} refY={5} markerWidth={7} markerHeight={7} orient="auto-start-reverse">
+          <path d="M1 1L9 5L1 9z" fill="#6B7390" />
         </marker>
+        <linearGradient id="gSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#F3EBDA" /><stop offset="1" stopColor="#E2D5B8" /></linearGradient>
+        <linearGradient id="gCard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#FFFEFB" /><stop offset="1" stopColor="#F6F1E6" /></linearGradient>
+        <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#E6F0F9" /><stop offset="1" stopColor="#C6DAEE" /></linearGradient>
+        <linearGradient id="gBlush" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#FAE7E0" /><stop offset="1" stopColor="#EECBBF" /></linearGradient>
+        <linearGradient id="gSage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#DFEEE3" /><stop offset="1" stopColor="#BFDAC6" /></linearGradient>
+        <linearGradient id="gNavy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#33406C" /><stop offset="1" stopColor="#1A2340" /></linearGradient>
+        <linearGradient id="gLane1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#FFFFFF" stopOpacity=".75" /><stop offset="1" stopColor="#FFFFFF" stopOpacity=".25" /></linearGradient>
+        <linearGradient id="gLane2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#E3EBF5" stopOpacity=".7" /><stop offset="1" stopColor="#E3EBF5" stopOpacity=".2" /></linearGradient>
+        <filter id="sh" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" floodColor="#1C2540" floodOpacity=".11" /></filter>
+        <filter id="glow" x="-30%" y="-40%" width="160%" height="200%"><feDropShadow dx="0" dy="5" stdDeviation="7" floodColor="#1C2540" floodOpacity=".38" /></filter>
       </defs>
 
-      <text className="lane" x="20" y="34">INDEXING · OFFLINE</text>
-      <text className="lane" x="20" y="152">QUERY · ONLINE</text>
+      {/* lanes */}
+      <rect x="4" y="12" width="632" height="106" rx="20" fill="url(#gLane1)" />
+      <rect x="4" y="126" width="632" height="208" rx="20" fill="url(#gLane2)" />
+      <circle cx="21" cy="31" r="3" fill="#6B7390" /><text className="lane" x="30" y="34.5">INDEXING · OFFLINE</text>
+      <circle cx="21" cy="145" r="3" fill="#1C2540" /><text className="lane" x="30" y="148.5">QUERY · ONLINE</text>
 
+      {/* lines */}
       <path className="ln" d="M132 73H160" markerEnd={ah} />
       <path className="ln" d="M284 73H312" markerEnd={ah} />
-      <path className="ln" d="M262 48C262 30 510 30 510 46" markerEnd={ah} />
-      <text className="sub" x="386" y="30" textAnchor="middle">text · keywords</text>
+      <path className="ln" d="M262 48C262 30 510 30 510 46" markerEnd={ah} /><text className="sub" x="386" y="30" textAnchor="middle">text · keywords</text>
       <path className="ln" d="M436 73H464" markerEnd={ah} />
       <path className="ln" d="M543 98C543 135 371 128 371 162" markerEnd={ah} />
       <path className="ln" d="M116 191H144" markerEnd={ah} />
@@ -75,35 +88,70 @@ export function HeroDiagram({ active, onActive }: Props) {
 
       <path id="flowQ" d="M68 191H543V289H360" fill="none" />
       <path id="flowI" d="M76 73H543" fill="none" />
-      <circle r="4.5" fill="#1C2540">
-        <animateMotion dur="5s" repeatCount="indefinite"><mpath href="#flowQ" /></animateMotion>
-      </circle>
-      <circle r="3.5" fill="#8A91AA">
-        <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#flowI" /></animateMotion>
-      </circle>
+      <circle r="9" fill="#1C2540" opacity=".12"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#flowQ" /></animateMotion></circle>
+      <circle r="4.5" fill="#1C2540"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#flowQ" /></animateMotion></circle>
+      <circle r="7" fill="#6B7390" opacity=".15"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#flowI" /></animateMotion></circle>
+      <circle r="3.5" fill="#6B7390"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#flowI" /></animateMotion></circle>
 
-      <M a={active} on={onActive} k="src"><rect x="20" y="48" width="112" height="50" rx="12" fill="#E9DFCB" /><text className="lbl" x="76" y="70" textAnchor="middle">SOURCES</text><text className="sub" x="76" y="86" textAnchor="middle">PDFs · reports · docs</text></M>
-      <M a={active} on={onActive} k="chunk"><rect x="162" y="48" width="122" height="50" rx="12" fill="#FCFAF4" /><text className="lbl" x="223" y="70" textAnchor="middle">PARSE &amp; CHUNK</text><text className="sub" x="223" y="86" textAnchor="middle">layout · metadata</text></M>
-      <M a={active} on={onActive} k="embed"><rect x="314" y="48" width="122" height="50" rx="12" fill="#FCFAF4" /><text className="lbl" x="375" y="70" textAnchor="middle">EMBED</text><text className="sub" x="375" y="86" textAnchor="middle">dense vectors</text></M>
-      <M a={active} on={onActive} k="index"><rect x="466" y="48" width="154" height="50" rx="12" fill="#D3E2F0" /><text className="lbl" x="543" y="70" textAnchor="middle">INDEX</text><text className="sub" x="543" y="86" textAnchor="middle">keyword + vector</text></M>
+      {/* indexing */}
+      <M a={active} on={onActive} k="src">
+        <rect className="bx" x="20" y="48" width="112" height="50" rx="13" fill="url(#gSand)" filter="url(#sh)" /><text className="lbl" x="76" y="70" textAnchor="middle">SOURCES</text><text className="sub" x="76" y="86" textAnchor="middle">PDFs · reports · docs</text>
+        <g className="ic" transform="translate(30 48)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.85)" d="M-3.5-5H1.5L3.5-3V5H-3.5Z M-1.5 0H1.5 M-1.5 2.5H1.5" /></g>
+      </M>
+      <M a={active} on={onActive} k="chunk">
+        <rect className="bx" x="162" y="48" width="122" height="50" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="lbl" x="223" y="70" textAnchor="middle">PARSE &amp; CHUNK</text><text className="sub" x="223" y="86" textAnchor="middle">layout · metadata</text>
+        <g className="ic" transform="translate(172 48)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.85)" d="M0-4.5L5-2L0 .5L-5-2Z M-5 1.2L0 3.7L5 1.2" /></g>
+      </M>
+      <M a={active} on={onActive} k="embed">
+        <rect className="bx" x="314" y="48" width="122" height="50" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="lbl" x="375" y="70" textAnchor="middle">EMBED</text><text className="sub" x="375" y="86" textAnchor="middle">dense vectors</text>
+        <g className="ic" transform="translate(324 48)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.85)" d="M-5 0C-3-5-2-5 0 0S3 5 5 0" /></g>
+      </M>
+      <M a={active} on={onActive} k="index">
+        <rect className="bx" x="466" y="48" width="154" height="50" rx="13" fill="url(#gSky)" filter="url(#sh)" /><text className="lbl" x="543" y="70" textAnchor="middle">INDEX</text><text className="sub" x="543" y="86" textAnchor="middle">keyword + vector</text>
+        <g className="ic" transform="translate(476 48)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><g transform="scale(.85)"><ellipse className="g" cx="0" cy="-3" rx="4" ry="1.8" /><path d="M-4-3V3C-4 4.6 4 4.6 4 3V-3M-4 0C-4 1.6 4 1.6 4 0" /></g></g>
+      </M>
 
-      <M a={active} on={onActive} k="q"><rect x="20" y="164" width="96" height="54" rx="12" fill="#FCFAF4" /><text className="lbl" x="68" y="188" textAnchor="middle">QUESTION</text><text className="sub" x="68" y="204" textAnchor="middle">user intent</text></M>
-      <M a={active} on={onActive} k="plan"><rect x="146" y="164" width="130" height="54" rx="12" fill="#F3D9D0" /><text className="lbl" x="211" y="188" textAnchor="middle">AGENT · PLANNER</text><text className="sub" x="211" y="204" textAnchor="middle">plan · route · call tools</text></M>
-      <M a={active} on={onActive} k="retr"><rect x="306" y="164" width="130" height="54" rx="12" fill="#1C2540" style={{ stroke: "#1C2540" }} /><text className="lbl" x="371" y="188" textAnchor="middle" style={{ fill: "#F7F3EA" }}>RETRIEVAL</text><text className="sub" x="371" y="204" textAnchor="middle" style={{ fill: "#C4CADD" }}>hybrid search</text></M>
-      <M a={active} on={onActive} k="rerank"><rect x="466" y="164" width="154" height="54" rx="12" fill="#FCFAF4" /><text className="lbl" x="543" y="188" textAnchor="middle">RE-RANK &amp; FILTER</text><text className="sub" x="543" y="204" textAnchor="middle">best evidence · permissions</text></M>
-      <M a={active} on={onActive} k="gen"><rect x="466" y="262" width="154" height="54" rx="12" fill="#CFE3D4" /><text className="lbl" x="543" y="286" textAnchor="middle">SYNTHESIS</text><text className="sub" x="543" y="302" textAnchor="middle">grounded in evidence</text></M>
-      <M a={active} on={onActive} k="ans"><rect x="280" y="262" width="160" height="54" rx="12" fill="#D3E2F0" /><text className="lbl" x="360" y="286" textAnchor="middle">ANSWER + CITATIONS</text><text className="sub" x="360" y="302" textAnchor="middle">every claim sourced</text></M>
+      {/* query */}
+      <M a={active} on={onActive} k="q">
+        <rect className="bx" x="20" y="164" width="96" height="54" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="lbl" x="68" y="188" textAnchor="middle">QUESTION</text><text className="sub" x="68" y="204" textAnchor="middle">user intent</text>
+        <g className="ic" transform="translate(30 164)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.85)" d="M-5-3.5H5V2H-1L-3.5 4.5V2H-5Z" /></g>
+      </M>
+      <M a={active} on={onActive} k="plan">
+        <rect className="bx" x="146" y="164" width="130" height="54" rx="13" fill="url(#gBlush)" filter="url(#sh)" /><text className="lbl" x="211" y="188" textAnchor="middle">AGENT · PLANNER</text><text className="sub" x="211" y="204" textAnchor="middle">plan · route · call tools</text>
+        <g className="ic" transform="translate(156 164)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><g transform="scale(.85)"><path d="M-4 3C-4-2 2 3 4-3" /><circle className="g" cx="-4" cy="3" r="1.3" /><circle className="g" cx="4" cy="-3" r="1.3" /></g></g>
+      </M>
+      <M a={active} on={onActive} k="retr">
+        <rect className="bx" x="306" y="164" width="130" height="54" rx="13" fill="url(#gNavy)" filter="url(#glow)" style={{ stroke: "#1C2540" }} /><text className="lbl" x="371" y="188" textAnchor="middle" style={{ fill: "#F7F3EA" }}>RETRIEVAL</text><text className="sub" x="371" y="204" textAnchor="middle" style={{ fill: "#C4CADD" }}>hybrid search</text>
+        <g className="ic" transform="translate(316 164)"><circle r="9" fill="#F7F3EA" stroke="rgba(247,243,234,.4)" /><g transform="scale(.85)"><circle className="g" cx="-1" cy="-1" r="3.5" /><path d="M1.6 1.6L4.5 4.5" /></g></g>
+      </M>
+      <M a={active} on={onActive} k="rerank">
+        <rect className="bx" x="466" y="164" width="154" height="54" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="lbl" x="543" y="188" textAnchor="middle">RE-RANK &amp; FILTER</text><text className="sub" x="543" y="204" textAnchor="middle">best evidence · permissions</text>
+        <g className="ic" transform="translate(476 164)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.85)" d="M-5-4H5L1 .5V4.5L-1 3.5V.5Z" /></g>
+      </M>
+      <M a={active} on={onActive} k="gen">
+        <rect className="bx" x="466" y="262" width="154" height="54" rx="13" fill="url(#gSage)" filter="url(#sh)" /><text className="lbl" x="543" y="286" textAnchor="middle">SYNTHESIS</text><text className="sub" x="543" y="302" textAnchor="middle">grounded in evidence</text>
+        <g className="ic" transform="translate(476 262)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.8)" d="M0-5L1.2-1.2L5 0L1.2 1.2L0 5L-1.2 1.2L-5 0L-1.2-1.2Z" /></g>
+      </M>
+      <M a={active} on={onActive} k="ans">
+        <rect className="bx" x="280" y="262" width="160" height="54" rx="13" fill="url(#gSky)" filter="url(#sh)" /><text className="lbl" x="360" y="286" textAnchor="middle">ANSWER + CITATIONS</text><text className="sub" x="360" y="302" textAnchor="middle">every claim sourced</text>
+        <g className="ic" transform="translate(290 262)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.8)" d="M-3.5-5H3.5V5L0 2.5L-3.5 5Z" /></g>
+      </M>
 
       <path className="ln" d="M165 222C165 245 80 238 80 260" markerStart={ah} markerEnd={ah} />
-      <M a={active} on={onActive} k="mcp"><rect x="20" y="262" width="120" height="54" rx="12" fill="#E9DFCB" /><text className="lbl" x="80" y="286" textAnchor="middle">TOOLS · MCP</text><text className="sub" x="80" y="302" textAnchor="middle">APIs · DBs · apps</text></M>
+      <M a={active} on={onActive} k="mcp">
+        <rect className="bx" x="20" y="262" width="120" height="54" rx="13" fill="url(#gSand)" filter="url(#sh)" /><text className="lbl" x="80" y="286" textAnchor="middle">TOOLS · MCP</text><text className="sub" x="80" y="302" textAnchor="middle">APIs · DBs · apps</text>
+        <g className="ic" transform="translate(30 262)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.8)" d="M-2-5V-1M2-5V-1M-4-1H4V1Q4 4 0 4T-4 1ZM0 4V5.5" /></g>
+      </M>
 
+      {/* eval */}
       <M a={active} on={onActive} k="eval">
-        <rect x="20" y="372" width="600" height="70" rx="14" fill="#F7F3EA" style={{ stroke: "#8A91AA", strokeDasharray: "5 5" }} />
-        <text className="lbl" x="44" y="401">EVALUATION &amp; FEEDBACK</text><text className="sub" x="44" y="419">Langfuse · RAGAS · query logs</text>
-        <rect x="252" y="394" width="92" height="26" rx="13" fill="#FCFAF4" /><text className="sub" x="298" y="411" textAnchor="middle">query success</text>
-        <rect x="352" y="394" width="72" height="26" rx="13" fill="#FCFAF4" /><text className="sub" x="388" y="411" textAnchor="middle">recall@k</text>
-        <rect x="432" y="394" width="86" height="26" rx="13" fill="#FCFAF4" /><text className="sub" x="475" y="411" textAnchor="middle">faithfulness</text>
-        <rect x="526" y="394" width="72" height="26" rx="13" fill="#FCFAF4" /><text className="sub" x="562" y="411" textAnchor="middle">latency</text>
+        <rect className="bx" x="20" y="372" width="600" height="70" rx="16" fill="#F4EEDF" fillOpacity=".85" style={{ stroke: "#6B7390", strokeDasharray: "5 5" }} />
+        <text className="lbl" x="48" y="401">EVALUATION &amp; FEEDBACK</text><text className="sub" x="48" y="419">Langfuse · RAGAS · query logs</text>
+        <rect x="252" y="394" width="92" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="298" y="411" textAnchor="middle">query success</text>
+        <rect x="352" y="394" width="72" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="388" y="411" textAnchor="middle">recall@k</text>
+        <rect x="432" y="394" width="86" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="475" y="411" textAnchor="middle">faithfulness</text>
+        <rect x="526" y="394" width="72" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="562" y="411" textAnchor="middle">latency</text>
+        <g className="ic" transform="translate(30 372)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.8)" d="M-5 0H-2L-1-4L1 4L2 0H5" /></g>
       </M>
     </svg>
   );
