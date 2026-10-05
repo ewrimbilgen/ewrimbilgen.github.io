@@ -3,18 +3,18 @@ import type { ReactNode } from "react";
 export const DEFAULT_CAPTION = "Modular RAG, and the product call I make at each stage. Hover a module.";
 
 export const D: Record<string, string> = {
-  src: "EMIS: 2M+ research PDFs; natural-language queries across them cut analyst research time 40%. Client work: 500K+ internal documents.",
+  src: "Client work: 500K+ internal insurance documents. At EMIS: 2M+ research PDFs, where natural-language queries cut analyst research time 40%.",
   chunk: "Tables and multi-column layouts break first in report PDFs. My test for chunking: can the answer cite the exact passage?",
   embed: "Embedding model choice trades cost, latency and quality. Choose it on real user questions, not a public leaderboard.",
   index: "Keyword search wins on company names and exact terms; vectors win on meaning. Research users need both.",
   q: "At EMIS I clustered query logs to see where the long tail broke. 30% of churned trials named search.",
-  plan: "The agent in the research assistant I led: break a complex question into search, retrieval and synthesis steps, then decide what to call next.",
-  retr: "At EMIS I sequenced the fixes: Elasticsearch, caching, then pagination. Zero-result queries fell 34%, P95 latency 18%.",
+  plan: "The agent breaks a complex question into sub-queries, decides which tools to call through MCP, and checks whether it has enough evidence.",
+  retr: "Hybrid search: BM25 for exact terms, embeddings for meaning. Evals showed retrieval was the weak point, so this came before any prompt work.",
   rerank: "Fewer, better passages beat more context: cheaper, faster, fewer wrong citations. The cut-off is a quality-versus-latency call.",
   gen: "The model writes only from retrieved evidence. When it is thin, better to search again, or say so, than guess.",
-  mcp: "Same lesson as my OpenAPI SDK generator: one standard interface beats one-off integrations. MCP applies it to the agent's live data.",
-  ans: "Citations back every answer in the research assistant I led, now an MVP with 3 clients. No source, no claim.",
-  eval: "I pair model scores (RAGAS, Langfuse traces) with product KPIs like query success rate and time-to-insight. Together they pick the next fix.",
+  mcp: "MCP is the stable tool layer between the agent and the data: search, fetch document, metadata. The backend can change without touching the agent.",
+  ans: "Claim-level citations: every claim maps to a source passage. No source, no claim. Now an MVP with 3 clients.",
+  eval: "Three layers, measured separately: retrieval, answer faithfulness and citation grounding. The first results said the problem was retrieval, not the model.",
 };
 
 type Props = { active: string | null; onActive: (k: string | null) => void };
@@ -76,13 +76,14 @@ export function HeroDiagram({ active, onActive }: Props) {
       <path className="ln" d="M436 73H464" markerEnd={ah} />
       <path className="ln" d="M543 98C543 135 371 128 371 162" markerEnd={ah} />
       <path className="ln" d="M116 191H144" markerEnd={ah} />
-      <path className="ln" d="M276 191H304" markerEnd={ah} />
+      <path className="ln" d="M276 191H279M301 191H306" />
       <path className="ln" d="M436 191H464" markerEnd={ah} />
       <path className="ln" d="M543 218V260" markerEnd={ah} />
       <path className="ln" d="M466 289H442" markerEnd={ah} />
       <path className="ln dash" d="M490 262C490 246 478 240 460 240H262C251 240 246 234 246 224" markerEnd={ah} />
       <text className="sub" x="355" y="254" textAnchor="middle" style={{ fontStyle: "italic" }}>needs more evidence</text>
       <path className="ln" d="M360 316V370" markerEnd={ah} />
+      <path className="ln dash" d="M420 218C420 230 453 228 453 244V370" markerEnd={ah} />
       <path className="ln dash" d="M200 372V222" markerEnd={ah} />
       <path className="ln dash" d="M30 372V340H10V122H223V101" markerEnd={ah} />
 
@@ -137,20 +138,26 @@ export function HeroDiagram({ active, onActive }: Props) {
         <g className="ic" transform="translate(290 262)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.8)" d="M-3.5-5H3.5V5L0 2.5L-3.5 5Z" /></g>
       </M>
 
-      <path className="ln" d="M165 222C165 245 80 238 80 260" markerStart={ah} markerEnd={ah} />
+      <path className="ln" d="M170 222C170 245 95 238 95 260" markerStart={ah} markerEnd={ah} />
       <M a={active} on={onActive} k="mcp">
-        <rect className="bx" x="20" y="262" width="120" height="54" rx="13" fill="url(#gSand)" filter="url(#sh)" /><text className="lbl" x="80" y="286" textAnchor="middle">TOOLS · MCP</text><text className="sub" x="80" y="302" textAnchor="middle">APIs · DBs · apps</text>
+        <rect className="bx" x="20" y="262" width="140" height="54" rx="13" fill="url(#gSand)" filter="url(#sh)" /><text className="lbl" x="90" y="286" textAnchor="middle">MCP TOOLS</text><text className="sub" x="90" y="302" textAnchor="middle">search · fetch · metadata</text>
         <g className="ic" transform="translate(30 262)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.8)" d="M-2-5V-1M2-5V-1M-4-1H4V1Q4 4 0 4T-4 1ZM0 4V5.5" /></g>
+      </M>
+
+      <M a={active} on={onActive} k="mcp">
+        <rect className="bx" x="279" y="166" width="22" height="50" rx="7" fill="url(#gSand)" filter="url(#sh)" />
+        <text className="lbl" x="290" y="191" textAnchor="middle" dominantBaseline="middle" transform="rotate(-90 290 191)" style={{ fontSize: 9 }}>MCP</text>
       </M>
 
       {/* eval */}
       <M a={active} on={onActive} k="eval">
         <rect className="bx" x="20" y="372" width="600" height="70" rx="16" fill="#F4EEDF" fillOpacity=".85" style={{ stroke: "#6B7390", strokeDasharray: "5 5" }} />
-        <text className="lbl" x="48" y="401">EVALUATION &amp; FEEDBACK</text><text className="sub" x="48" y="419">Langfuse · RAGAS · query logs</text>
-        <rect x="252" y="394" width="92" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="298" y="411" textAnchor="middle">query success</text>
-        <rect x="352" y="394" width="72" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="388" y="411" textAnchor="middle">recall@k</text>
-        <rect x="432" y="394" width="86" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="475" y="411" textAnchor="middle">faithfulness</text>
-        <rect x="526" y="394" width="72" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="562" y="411" textAnchor="middle">latency</text>
+        <text className="lbl" x="48" y="401">EVALUATION &amp; FEEDBACK</text><text className="sub" x="48" y="419">retrieval · answer · citations</text>
+        <rect x="244" y="394" width="66" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="277" y="411" textAnchor="middle">recall@k</text>
+        <rect x="316" y="394" width="86" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="359" y="411" textAnchor="middle">faithfulness</text>
+        <rect x="408" y="394" width="120" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="468" y="411" textAnchor="middle">citation grounding</text>
+        <rect x="534" y="394" width="64" height="26" rx="13" fill="url(#gCard)" filter="url(#sh)" /><text className="sub" x="566" y="411" textAnchor="middle">latency</text>
+        <text className="sub" x="48" y="433" style={{ fontSize: 9.5 }}>Langfuse · RAGAS · query logs</text>
         <g className="ic" transform="translate(30 372)"><circle r="9" fill="#FFFEFB" stroke="rgba(28,37,64,.14)" /><path transform="scale(.8)" d="M-5 0H-2L-1-4L1 4L2 0H5" /></g>
       </M>
     </svg>
