@@ -39,7 +39,7 @@ const STATS = [
   { value: "10+", label: "years in product" },
   { value: "2M+", label: "research reports made searchable in plain language" },
   { value: "38M", label: "subscribers on the platform I helped transform" },
-  { value: "50+", label: "people in the cross-functional team I led" },
+  { value: "50+", label: "people in the largest cross-functional group I led" },
 ];
 
 type Work = {
@@ -54,42 +54,51 @@ type Work = {
 const WORK: Work[] = [
   {
     index: "01",
-    context: "Fractional TPM · AI Product",
+    context: "Technical PM (Contract) · AI Product",
     title: "Agentic RAG research assistant",
     description:
-      "Enterprise analysts were losing hours across disconnected PDF libraries. Led the build of an assistant that breaks complex questions into search, retrieval and synthesis steps and answers with citations from internal documents. MVP delivered to 3 clients, now shaping the roadmap for a Series A startup.",
-    tags: ["RAG", "LangChain", "Langfuse", "RAGAS"],
-    metric: ["500K+ documents"],
+      "Insurance analysts were losing hours searching across disconnected PDF libraries. Led the build of an agent that breaks complex questions into sub-queries, calls retrieval tools through MCP (search, fetch document, metadata) and answers with claim-level citations. Evals in three layers (retrieval, faithfulness, citation grounding) showed the weak point was retrieval, not the model, so I prioritized hybrid search and reranking over prompt changes. MVP delivered to 3 clients, now shaping the roadmap for a Series A startup.",
+    tags: ["Agentic RAG", "MCP", "Hybrid search", "Reranking", "Langfuse", "RAGAS"],
+    metric: ["500K+ documents", "MVP to 3 clients"],
   },
   {
     index: "02",
-    context: "Fractional TPM · Developer Product",
-    title: "LLM-powered SDK generator",
+    context: "Technical PM (Contract) · Search & Recommendations",
+    title: "Ludex: game search and recommendation agent",
     description:
-      "Shipped a tool that generates and maintains Python, TypeScript and Java SDKs straight from OpenAPI specs, reducing version drift across client libraries.",
-    tags: ["LLM", "OpenAPI", "Python", "TypeScript", "Java"],
-    metric: ["2–3 days to under 4 hours"],
+      "Steam search breaks on requests like \"co-op horror for 4 players under $15, not too scary\". Built an agent that turns requests like this into clear constraints, searches a public Steam catalog through MCP tools (keyword and semantic search, filters, reranking) and explains each pick with the data behind it.",
+    tags: ["MCP", "Hybrid search", "Query understanding", "Langfuse"],
+    metric: ["200-query eval set"],
   },
   {
     index: "03",
+    context: "Technical PM (Contract) · Developer Product",
+    title: "LLM-powered SDK generator",
+    description:
+      "Generates Python, TypeScript and Java SDKs from OpenAPI specs, so 2 B2B clients stopped losing days to manual SDK updates.",
+    tags: ["LLM", "OpenAPI", "Python", "TypeScript", "Java"],
+    metric: ["2-3 days to under 4 hours"],
+  },
+  {
+    index: "04",
     context: "EMIS · Search",
     title: "Search relevance and latency",
     description:
       "APAC users waited up to 5 seconds per query and 30% of churned trials blamed search. Pulled the query logs, clustered behaviour to find where the long tail broke, then fixed Elasticsearch, caching and pagination in that order.",
     tags: ["Elasticsearch", "Query analysis", "Behavioural clustering"],
-    metric: ["P95 latency −18%", "Zero-result −34%"],
-  },
-  {
-    index: "04",
-    context: "EMIS · Document Intelligence",
-    title: "AI research layer over 2M+ PDFs",
-    description:
-      "Made the case for natural-language queries across the full report library and led the team through it.",
-    tags: ["Semantic search", "LLM", "Product strategy"],
-    metric: ["Research time −40%"],
+    metric: ["P95 latency -18%", "Zero-result -34%", "Trial-to-paid 8.5% to 9.5%"],
   },
   {
     index: "05",
+    context: "EMIS · Document Intelligence",
+    title: "AI research layer over 2M+ PDFs",
+    description:
+      "Made the case for natural-language queries across the full report library and led the team through it. Power-user retention rose 23% within six months.",
+    tags: ["Semantic search", "LLM", "Product strategy"],
+    metric: ["Research time -40%"],
+  },
+  {
+    index: "06",
     context: "EMIS · Platform & APIs",
     title: "API contracts clients could build on",
     description:
@@ -98,13 +107,13 @@ const WORK: Work[] = [
     metric: ["Integration 6 weeks to 10 days", "40+ enterprise clients"],
   },
   {
-    index: "06",
+    index: "07",
     context: "Turkcell · Platform",
     title: "CRM and billing for 38M subscribers",
     description:
-      "Led a 50+ person cross-functional team through a microservices transformation with CI/CD and observability, plus an ML customer-segmentation engine.",
+      "Directly managed a core team of 8 within a 50+ cross-functional group, and mentored 2 junior PMs, through a microservices transformation with CI/CD and observability, plus an ML customer-segmentation engine.",
     tags: ["Microservices", "CI/CD", "ML segmentation"],
-    metric: ["Deploys 4h+ to under 30 min"],
+    metric: ["Deploys 4h+ to under 30 min", "Peak-load incidents -60%"],
   },
 ];
 
@@ -112,17 +121,17 @@ const EARLIER = [
   {
     context: "BR-AG (now Regnology) · Fintech",
     title: "Regulatory reporting that passes validation",
-    body: "Redesigned data contracts for COREP and FINREP submissions, added ML risk flagging before filings reached regulators, and gave compliance self-service SQL.",
+    body: "Redesigned data contracts for COREP and FINREP submissions, added ML risk flagging before filings reached regulators, and gave compliance self-service SQL. Onboarded and mentored a junior PM.",
   },
   {
-    context: "Mira · 0-to-1",
-    title: "Behavioural scoring for iGaming",
-    body: "ML propensity scoring, from concept to a production scoring service validated with A/B tests.",
+    context: "MIRA · 0-to-1",
+    title: "Behavioural scoring for video game studios",
+    body: "Led 4 data scientists, 6 engineers and QA to take ML propensity scoring from concept to a production service, validated with A/B tests, so studios could spot players about to churn.",
   },
   {
     context: "Allianz · 0-to-1",
     title: "Mobile health insurance app",
-    body: "Taken from nothing to 65% mobile adoption within 6 months, reducing call-centre load.",
+    body: "Led a 20+ person team from nothing to 65% mobile adoption within 6 months, reducing call-centre load.",
   },
 ];
 
@@ -130,12 +139,12 @@ const LENS = [
   {
     label: "Search & Retrieval",
     title: "Relevance you can measure",
-    body: "Elasticsearch, ranking, query understanding, long-tail and zero-result analysis, semantic and vector search.",
+    body: "Elasticsearch, ranking, query understanding, long-tail and zero-result analysis, hybrid search and reranking.",
   },
   {
     label: "AI × Documents",
     title: "Grounded LLM products",
-    body: "RAG over large corpora, citations and grounding, agentic workflows, evals with Langfuse and RAGAS.",
+    body: "Agentic RAG over large corpora, MCP tool layers, claim-level citations, evals with Langfuse and RAGAS.",
   },
   {
     label: "Platforms & APIs",
@@ -145,7 +154,7 @@ const LENS = [
   {
     label: "Data & Experimentation",
     title: "Decisions from data",
-    body: "Python, SQL, behavioural clustering, predictive scoring, A/B testing, KPIs and OKRs.",
+    body: "Python, SQL, behavioural clustering, predictive scoring, A/B testing and experiment design, KPIs and OKRs.",
   },
 ];
 
@@ -159,33 +168,35 @@ const CHIPS = [
   "Hugging Face",
   "Langfuse",
   "RAGAS",
+  "MCP",
   "Claude",
   "Lovable",
   "OpenAPI",
+  "FastAPI",
   "AWS",
 ];
 
 const CAREER = [
-  { years: "2025–now", initials: "FT", company: "Fractional TPM", role: "AI product work with B2B SaaS and early-stage teams", location: "Remote" },
+  { years: "2025-now", initials: "TP", company: "Technical Product Manager (Contract)", role: "Self-employed · AI products for B2B SaaS and early-stage teams", location: "Remote" },
   {
-    years: "2022–2025",
+    years: "2022-2025",
     initials: "EM",
     company: "ISI Emerging Markets / EMIS",
-    role: "Senior Product Manager · teams in Bulgaria, China and the UK",
+    role: "Senior Product Manager · project teams of 20+ in Bulgaria, China and the UK",
     location: "Warsaw",
   },
-  { years: "2022", initials: "BR", company: "BR-AG (now Regnology)", role: "Senior Product Manager", location: "Poznań" },
-  { years: "2020–2021", initials: "MI", company: "Mira", role: "Senior Product Manager", location: "WA, USA" },
-  { years: "2017–2019", initials: "TC", company: "Turkcell", role: "Senior Product Manager", location: "Istanbul" },
-  { years: "2015–2017", initials: "AZ", company: "Allianz", role: "Senior Product Owner", location: "Istanbul" },
+  { years: "2022", initials: "BR", company: "BR-AG (now Regnology)", role: "Senior Product Manager · mentored a junior PM", location: "Poznań" },
+  { years: "2020-2021", initials: "MI", company: "MIRA", role: "Senior Product Manager · led 4 data scientists and 6 engineers", location: "WA, USA" },
+  { years: "2017-2019", initials: "TC", company: "Turkcell", role: "Senior Product Manager · core team of 8, mentored 2 junior PMs", location: "Istanbul" },
+  { years: "2015-2017", initials: "AZ", company: "Allianz", role: "Senior Product Owner · 20+ person team", location: "Istanbul" },
   {
-    years: "2013–2015",
+    years: "2013-2015",
     initials: "LO",
     company: "Logo Business",
     role: "Senior Software Analyst Developer",
     location: "Istanbul",
   },
-  { years: "2010–2013", initials: "AX", company: "Axa Insurance", role: "Software Developer", location: "Istanbul" },
+  { years: "2010-2013", initials: "AX", company: "Axa Insurance", role: "Software Developer", location: "Istanbul" },
 ];
 
 const ABOUT = [
@@ -301,7 +312,7 @@ function Portfolio() {
             </h2>
           </div>
           <p className="max-w-[30ch] text-base text-ink md:text-right">
-            Targeting visceral friction, delivering undeniable movement.
+            Real problems, measured results.
           </p>
         </div>
 
@@ -408,7 +419,7 @@ function Portfolio() {
             From dev to prod.
           </h2>
           <p className="mt-7 max-w-[36ch] text-ink" style={{ lineHeight: 1.75 }}>
-            Insurance, telecom, fintech, iGaming and research platforms, first as an engineer, then in product.
+            Insurance, telecom, fintech, gaming and research platforms, first as an engineer, then in product.
           </p>
         </div>
         <ul className="reveal divide-y divide-line border-t border-line">
@@ -459,6 +470,9 @@ function Portfolio() {
           </h2>
           <p className="mt-7 max-w-[40ch] text-ink" style={{ fontSize: 18, lineHeight: 1.75 }}>
             Open to Technical PM roles in search, RAG and AI products.
+          </p>
+          <p className="mt-3 max-w-[44ch] text-ink" style={{ fontSize: 16, lineHeight: 1.7 }}>
+            Turkish citizen, open to relocation (EU Blue Card eligible) or remote.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <a href="mailto:bilgen.evrim@gmail.com" className={pillPrimary}>
